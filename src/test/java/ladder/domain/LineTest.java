@@ -104,225 +104,303 @@ class LineTest {
         }
     }
 
-    @Test
-    @DisplayName("사람 2명, 사다리 모양 | |")
-    void player2_connection_0() {
-        Line line = Line.createLineWithPlayerCount(2);
-        Player player1 = Player.valueOf("lucid", 0);
-        Player player2 = Player.valueOf("ader", 1);
+    @Nested
+    @DisplayName("run 메소드는")
+    class Describe_run {
 
-        line.run(player1);
-        line.run(player2);
+        @Nested
+        @DisplayName("만약 사람 2명, 사다리 모양 | |")
+        class Context_2_player_0_connection {
+            @Test
+            @DisplayName("2명 위치는 유지한다.")
+            void it_maintain_2_position() {
+                Line line = Line.createLineWithPlayerCount(2);
+                Player player1 = Player.valueOf("lucid", 0);
+                Player player2 = Player.valueOf("ader", 1);
 
-        assertThat(player1.getPos()).isEqualTo(0);
-        assertThat(player2.getPos()).isEqualTo(1);
-    }
+                line.run(player1);
+                line.run(player2);
 
-    @Test
-    @DisplayName("사람 2명, 사다리 모양 |-|")
-    void player2_connection_1() {
-        Line line = Line.createLineWithPlayerCount(2);
-        line.drawLadder(0);
-        Player player1 = Player.valueOf("lucid", 0);
-        Player player2 = Player.valueOf("ader", 1);
+                assertThat(player1.getPos()).isEqualTo(0);
+                assertThat(player2.getPos()).isEqualTo(1);
+            }
+        }
 
-        line.run(player1);
-        line.run(player2);
+        @Nested
+        @DisplayName("만약 사람 2명, 사다리 모양 |-|")
+        class Context_2_player_1_connection {
+            @Test
+            @DisplayName("2명의 위치는 바뀐다. 0->1 , 1->0")
+            void it_swap_2_position() {
+                Line line = Line.createLineWithPlayerCount(2);
+                line.drawLadder(0);
+                Player player1 = Player.valueOf("lucid", 0);
+                Player player2 = Player.valueOf("ader", 1);
 
-        assertThat(player1.getPos()).isEqualTo(1);
-        assertThat(player2.getPos()).isEqualTo(0);
-    }
+                line.run(player1);
+                line.run(player2);
 
-    @Test
-    @DisplayName("사람 3명, 사다리 모양 | | |")
-    void player3_connection_0() {
-        Line line = Line.createLineWithPlayerCount(3);
+                assertThat(player1.getPos()).isEqualTo(1);
+                assertThat(player2.getPos()).isEqualTo(0);
+            }
+        }
 
-        Player player1 = Player.valueOf("lucid", 0);
-        Player player2 = Player.valueOf("ader", 1);
-        Player player3 = Player.valueOf("phill", 2);
+        @Nested
+        @DisplayName("만약 사람 3명, 사다리 모양 | | |")
+        class Context_3_player_0_connection {
+            @Test
+            @DisplayName("3명 위치는 유지한다.")
+            void it_maintain_3_position() {
+                Line line = Line.createLineWithPlayerCount(3);
 
-        line.run(player1);
-        line.run(player2);
-        line.run(player3);
+                Player player1 = Player.valueOf("lucid", 0);
+                Player player2 = Player.valueOf("ader", 1);
+                Player player3 = Player.valueOf("phill", 2);
 
+                line.run(player1);
+                line.run(player2);
+                line.run(player3);
 
-        assertThat(player1.getPos()).isEqualTo(0);
-        assertThat(player2.getPos()).isEqualTo(1);
-        assertThat(player3.getPos()).isEqualTo(2);
-    }
+                assertThat(player1.getPos()).isEqualTo(0);
+                assertThat(player2.getPos()).isEqualTo(1);
+                assertThat(player3.getPos()).isEqualTo(2);
+            }
 
-    @Test
-    @DisplayName("사람 3명, 사다리 모양 |-| |")
-    void player3_left_connection_1() {
-        Line line = Line.createLineWithPlayerCount(3);
-        line.drawLadder(0);
+            @Nested
+            @DisplayName("만약 사람 3명, 사다리 모양 |-| |")
+            class Context_3_player_1_left_connection {
+                @Test
+                @DisplayName("왼쪽 2명의 위치는 바뀐다.")
+                void it_swap_2_left_position() {
+                    Line line = Line.createLineWithPlayerCount(3);
+                    line.drawLadder(0);
 
-        Player player1 = Player.valueOf("lucid", 0);
-        Player player2 = Player.valueOf("ader", 1);
-        Player player3 = Player.valueOf("phill", 2);
+                    Player player1 = Player.valueOf("lucid", 0);
+                    Player player2 = Player.valueOf("ader", 1);
+                    Player player3 = Player.valueOf("phill", 2);
 
-        line.run(player1);
-        line.run(player2);
-        line.run(player3);
+                    line.run(player1);
+                    line.run(player2);
+                    line.run(player3);
 
-        assertThat(player1.getPos()).isEqualTo(1);
-        assertThat(player2.getPos()).isEqualTo(0);
-        assertThat(player3.getPos()).isEqualTo(2);
-    }
+                    assertThat(player1.getPos()).isEqualTo(1);
+                    assertThat(player2.getPos()).isEqualTo(0);
+                    assertThat(player3.getPos()).isEqualTo(2);
+                }
+            }
 
-    @Test
-    @DisplayName("사람 3명, 사다리 모양 | |-|")
-    void player3_right_connection_1() {
-        Line line = Line.createLineWithPlayerCount(3);
-        line.drawLadder(1);
+            @Nested
+            @DisplayName("만약 사람 3명, 사다리 모양 | |-|")
+            class Context_3_player_1_right_connection {
+                @Test
+                @DisplayName("오른쪽 2명의 위치는 바뀐다.")
+                void it_swap_2_right_position() {
+                    Line line = Line.createLineWithPlayerCount(3);
+                    line.drawLadder(1);
 
-        Player player1 = Player.valueOf("lucid", 0);
-        Player player2 = Player.valueOf("ader", 1);
-        Player player3 = Player.valueOf("phill", 2);
+                    Player player1 = Player.valueOf("lucid", 0);
+                    Player player2 = Player.valueOf("ader", 1);
+                    Player player3 = Player.valueOf("phill", 2);
 
-        line.run(player1);
-        line.run(player2);
-        line.run(player3);
+                    line.run(player1);
+                    line.run(player2);
+                    line.run(player3);
 
-        assertThat(player1.getPos()).isEqualTo(0);
-        assertThat(player2.getPos()).isEqualTo(2);
-        assertThat(player3.getPos()).isEqualTo(1);
-    }
+                    assertThat(player1.getPos()).isEqualTo(0);
+                    assertThat(player2.getPos()).isEqualTo(2);
+                    assertThat(player3.getPos()).isEqualTo(1);
+                }
+            }
+        }
 
-    @Test
-    @DisplayName("사람 4명, 사다리 모양 | | | |")
-    void player4_connection_0() {
-        Line line = Line.createLineWithPlayerCount(4);
+        @Nested
+        @DisplayName("만약 사람 4명, 사다리 모양 | | | |")
+        class Context_4_player_0_connection {
+            @Test
+            @DisplayName("4명의 위치는 유지한다.")
+            void it_maintain_2_position() {
+                Line line = Line.createLineWithPlayerCount(4);
 
-        Player player1 = Player.valueOf("lucid", 0);
-        Player player2 = Player.valueOf("ader", 1);
-        Player player3 = Player.valueOf("phill", 2);
-        Player player4 = Player.valueOf("miller", 3);
+                Player player1 = Player.valueOf("lucid", 0);
+                Player player2 = Player.valueOf("ader", 1);
+                Player player3 = Player.valueOf("phill", 2);
+                Player player4 = Player.valueOf("miller", 3);
 
-        line.run(player1);
-        line.run(player2);
-        line.run(player3);
-        line.run(player4);
+                line.run(player1);
+                line.run(player2);
+                line.run(player3);
+                line.run(player4);
 
-        assertThat(player1.getPos()).isEqualTo(0);
-        assertThat(player2.getPos()).isEqualTo(1);
-        assertThat(player3.getPos()).isEqualTo(2);
-        assertThat(player4.getPos()).isEqualTo(3);
-    }
+                assertThat(player1.getPos()).isEqualTo(0);
+                assertThat(player2.getPos()).isEqualTo(1);
+                assertThat(player3.getPos()).isEqualTo(2);
+                assertThat(player4.getPos()).isEqualTo(3);
+            }
+        }
 
-    @Test
-    @DisplayName("사람 4명, 사다리 모양 |-| | |")
-    void player4_left_connection_1() {
-        Line line = Line.createLineWithPlayerCount(4);
-        line.drawLadder(0);
+        @Nested
+        @DisplayName("만약 사람 4명, 사다리 모양 |-| | |")
+        class Context_4_player_1_left_connection {
+            @Test
+            @DisplayName("왼쪽 2명의 위치는 바뀐다.")
+            void it_swap_2_left_position() {
+                Line line = Line.createLineWithPlayerCount(4);
+                line.drawLadder(0);
 
-        Player player1 = Player.valueOf("lucid", 0);
-        Player player2 = Player.valueOf("ader", 1);
-        Player player3 = Player.valueOf("phill", 2);
-        Player player4 = Player.valueOf("miller", 3);
+                Player player1 = Player.valueOf("lucid", 0);
+                Player player2 = Player.valueOf("ader", 1);
+                Player player3 = Player.valueOf("phill", 2);
+                Player player4 = Player.valueOf("miller", 3);
 
-        line.run(player1);
-        line.run(player2);
-        line.run(player3);
-        line.run(player4);
+                line.run(player1);
+                line.run(player2);
+                line.run(player3);
+                line.run(player4);
 
-        assertThat(player1.getPos()).isEqualTo(1);
-        assertThat(player2.getPos()).isEqualTo(0);
-        assertThat(player3.getPos()).isEqualTo(2);
-        assertThat(player4.getPos()).isEqualTo(3);
-    }
+                assertThat(player1.getPos()).isEqualTo(1);
+                assertThat(player2.getPos()).isEqualTo(0);
+                assertThat(player3.getPos()).isEqualTo(2);
+                assertThat(player4.getPos()).isEqualTo(3);
+            }
+        }
 
-    @Test
-    @DisplayName("사람 4명, 사다리 모양 | |-| |")
-    void player4_center_connection_1() {
-        Line line = Line.createLineWithPlayerCount(4);
-        line.drawLadder(1);
+        @Nested
+        @DisplayName("만약 사람 4명, 사다리 모양 | |-| |")
+        class Context_4_player_1_cenger_connection {
+            @Test
+            @DisplayName("가운데 2명의 위치는 바뀐다.")
+            void it_swap_2_center_position() {
+                Line line = Line.createLineWithPlayerCount(4);
+                line.drawLadder(1);
 
-        Player player1 = Player.valueOf("lucid", 0);
-        Player player2 = Player.valueOf("ader", 1);
-        Player player3 = Player.valueOf("phill", 2);
-        Player player4 = Player.valueOf("miller", 3);
+                Player player1 = Player.valueOf("lucid", 0);
+                Player player2 = Player.valueOf("ader", 1);
+                Player player3 = Player.valueOf("phill", 2);
+                Player player4 = Player.valueOf("miller", 3);
 
-        line.run(player1);
-        line.run(player2);
-        line.run(player3);
-        line.run(player4);
+                line.run(player1);
+                line.run(player2);
+                line.run(player3);
+                line.run(player4);
 
-        assertThat(player1.getPos()).isEqualTo(0);
-        assertThat(player2.getPos()).isEqualTo(2);
-        assertThat(player3.getPos()).isEqualTo(1);
-        assertThat(player4.getPos()).isEqualTo(3);
-    }
+                assertThat(player1.getPos()).isEqualTo(0);
+                assertThat(player2.getPos()).isEqualTo(2);
+                assertThat(player3.getPos()).isEqualTo(1);
+                assertThat(player4.getPos()).isEqualTo(3);
+            }
+        }
 
-    @Test
-    @DisplayName("사람 4명, 사다리 모양 | | |-|")
-    void player4_right_connection_1() {
-        Line line = Line.createLineWithPlayerCount(4);
-        line.drawLadder(2);
+        @Nested
+        @DisplayName("만약 사람 4명, 사다리 모양 | | |-|")
+        class Context_4_player_1_right_connection {
+            @Test
+            @DisplayName("오른쪽 2명의 위치는 바뀐다.")
+            void it_swap_2_right_position() {
+                Line line = Line.createLineWithPlayerCount(4);
+                line.drawLadder(2);
 
-        Player player1 = Player.valueOf("lucid", 0);
-        Player player2 = Player.valueOf("ader", 1);
-        Player player3 = Player.valueOf("phill", 2);
-        Player player4 = Player.valueOf("miller", 3);
+                Player player1 = Player.valueOf("lucid", 0);
+                Player player2 = Player.valueOf("ader", 1);
+                Player player3 = Player.valueOf("phill", 2);
+                Player player4 = Player.valueOf("miller", 3);
 
-        line.run(player1);
-        line.run(player2);
-        line.run(player3);
-        line.run(player4);
+                line.run(player1);
+                line.run(player2);
+                line.run(player3);
+                line.run(player4);
 
-        assertThat(player1.getPos()).isEqualTo(0);
-        assertThat(player2.getPos()).isEqualTo(1);
-        assertThat(player3.getPos()).isEqualTo(3);
-        assertThat(player4.getPos()).isEqualTo(2);
-    }
+                assertThat(player1.getPos()).isEqualTo(0);
+                assertThat(player2.getPos()).isEqualTo(1);
+                assertThat(player3.getPos()).isEqualTo(3);
+                assertThat(player4.getPos()).isEqualTo(2);
+            }
+        }
 
-    @Test
-    @DisplayName("사람 4명, 사다리 모양 |-| |-|")
-    void player4_all_connection() {
-        Line line = Line.createLineWithPlayerCount(4);
-        line.drawLadder(0);
-        line.drawLadder(2);
+        @Nested
+        @DisplayName("만약 사람 4명, 사다리 모양 |-| |-|")
+        class Context_4_player_1_left_and_right_connection {
+            @Test
+            @DisplayName("왼쪽2명, 오른쪽 2명의 위치는 바뀐다.")
+            void it_swap_4_left_and_right_position() {
+                Line line = Line.createLineWithPlayerCount(4);
+                line.drawLadder(0);
+                line.drawLadder(2);
 
-        Player player1 = Player.valueOf("lucid", 0);
-        Player player2 = Player.valueOf("ader", 1);
-        Player player3 = Player.valueOf("phill", 2);
-        Player player4 = Player.valueOf("miller", 3);
+                Player player1 = Player.valueOf("lucid", 0);
+                Player player2 = Player.valueOf("ader", 1);
+                Player player3 = Player.valueOf("phill", 2);
+                Player player4 = Player.valueOf("miller", 3);
 
-        line.run(player1);
-        line.run(player2);
-        line.run(player3);
-        line.run(player4);
+                line.run(player1);
+                line.run(player2);
+                line.run(player3);
+                line.run(player4);
 
-        assertThat(player1.getPos()).isEqualTo(1);
-        assertThat(player2.getPos()).isEqualTo(0);
-        assertThat(player3.getPos()).isEqualTo(3);
-        assertThat(player4.getPos()).isEqualTo(2);
-    }
+                assertThat(player1.getPos()).isEqualTo(1);
+                assertThat(player2.getPos()).isEqualTo(0);
+                assertThat(player3.getPos()).isEqualTo(3);
+                assertThat(player4.getPos()).isEqualTo(2);
+            }
+        }
 
-    @Test
-    @DisplayName("사람 5명, 라인 1줄, 사다리 |-| |-| |")
-    void Player4_Connection2() {
-        Line line = Line.createLineWithPlayerCount(5);
-        line.drawLadder(0);
-        line.drawLadder(2);
+        @Nested
+        @DisplayName("만약 사람 5명, 사다리 모양 |-| |-| | ")
+        class Context_4_player_1_left_and_center_connection {
+            @Test
+            @DisplayName("왼쪽2명, 가운데 2명의 위치는 바뀐다.")
+            void it_swap_4_left_center_position() {
+                Line line = Line.createLineWithPlayerCount(5);
+                line.drawLadder(0);
+                line.drawLadder(2);
 
-        Player player1 = Player.valueOf("lucid", 0);
-        Player player2 = Player.valueOf("ader", 1);
-        Player player3 = Player.valueOf("phill", 2);
-        Player player4 = Player.valueOf("miller", 3);
-        Player player5 = Player.valueOf("kukim", 4);
+                Player player1 = Player.valueOf("lucid", 0);
+                Player player2 = Player.valueOf("ader", 1);
+                Player player3 = Player.valueOf("phill", 2);
+                Player player4 = Player.valueOf("miller", 3);
+                Player player5 = Player.valueOf("kukim", 4);
 
-        line.run(player1);
-        line.run(player2);
-        line.run(player3);
-        line.run(player4);
-        line.run(player5);
+                line.run(player1);
+                line.run(player2);
+                line.run(player3);
+                line.run(player4);
+                line.run(player5);
 
-        assertThat(player1.getPos()).isEqualTo(1);
-        assertThat(player2.getPos()).isEqualTo(0);
-        assertThat(player3.getPos()).isEqualTo(3);
-        assertThat(player4.getPos()).isEqualTo(2);
-        assertThat(player5.getPos()).isEqualTo(4);
+                assertThat(player1.getPos()).isEqualTo(1);
+                assertThat(player2.getPos()).isEqualTo(0);
+                assertThat(player3.getPos()).isEqualTo(3);
+                assertThat(player4.getPos()).isEqualTo(2);
+                assertThat(player5.getPos()).isEqualTo(4);
+            }
+        }
+
+        @Nested
+        @DisplayName("만약 사람 5명, 사다리 모양 | |-| |-|")
+        class Context_4_player_1_center_and_right_connection {
+            @Test
+            @DisplayName("가운데 2명, 오른쪽 2명의 위치는 바뀐다.")
+            void it_swap_4_center_right_position() {
+                Line line = Line.createLineWithPlayerCount(5);
+                line.drawLadder(1);
+                line.drawLadder(3);
+
+                Player player1 = Player.valueOf("lucid", 0);
+                Player player2 = Player.valueOf("ader", 1);
+                Player player3 = Player.valueOf("phill", 2);
+                Player player4 = Player.valueOf("miller", 3);
+                Player player5 = Player.valueOf("kukim", 4);
+
+                line.run(player1);
+                line.run(player2);
+                line.run(player3);
+                line.run(player4);
+                line.run(player5);
+
+                assertThat(player1.getPos()).isEqualTo(0);
+                assertThat(player2.getPos()).isEqualTo(2);
+                assertThat(player3.getPos()).isEqualTo(1);
+                assertThat(player4.getPos()).isEqualTo(4);
+                assertThat(player5.getPos()).isEqualTo(3);
+            }
+        }
     }
 }
