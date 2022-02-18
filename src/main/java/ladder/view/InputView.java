@@ -1,5 +1,6 @@
 package ladder.view;
 
+import ladder.domain.Item;
 import ladder.domain.Player;
 
 import java.util.ArrayList;
@@ -15,7 +16,9 @@ public class InputView {
 
     public static int getInputNumber(String message) {
         System.out.println(message);
-        return scanner.nextInt();
+        int result = scanner.nextInt();
+        System.out.println();
+        return result;
     }
 
     public static void close() {
@@ -26,13 +29,23 @@ public class InputView {
         System.out.println(message);
 
         List<Player> players = new ArrayList<>();
-
         String[] names = scanner.nextLine().replaceAll(" ", "").split(",");
-
-        for (String name : names) {
-            players.add(Player.createPlayerWithName(name));
+        System.out.println();
+        for (int i = 0; i < names.length; i++) {
+            players.add(Player.valueOf(names[i], i));
         }
-
         return players;
+    }
+
+    public static List<Item> getInputItems(String message) {
+        System.out.println(message);
+
+        List<Item> items = new ArrayList<>();
+        String[] names = scanner.nextLine().replaceAll(" ", "").split(",");
+        System.out.println();
+        for (String name : names) {
+            items.add(Item.of(name));
+        }
+        return items;
     }
 }
