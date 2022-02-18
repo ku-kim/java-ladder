@@ -6,6 +6,7 @@ import ladder.domain.Line;
 import ladder.domain.Player;
 import ladder.util.StringUtils;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class OutputView {
@@ -70,4 +71,32 @@ public class OutputView {
     }
 
 
+    public static void printQueryResult(String query, HashMap<String, String> results) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("실행 결과\n");
+        if (query.equals("all")) {
+            System.out.println(appendAllResults(results, sb));
+            return;
+        }
+        appendQueryResult(query, results, sb);
+        System.out.println(sb);
+    }
+
+    private static void appendQueryResult(String query, HashMap<String, String> results, StringBuilder sb) {
+        if (!results.containsKey(query)) {
+            sb.append(String.format("%s 사람이 없습니다.\n", query));
+            return;
+        }
+
+        results.entrySet().stream()
+                .filter(result -> result.getKey().equals(query))
+                .forEach(result -> sb.append(result.getValue() + "\n"));
+    }
+
+    private static String appendAllResults(HashMap<String, String> results, StringBuilder sb) {
+        results.forEach((playerName, itemName) ->
+                sb.append(String.format("%s : %s\n", playerName, itemName)));
+        return sb.toString();
+    }
 }

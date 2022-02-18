@@ -3,12 +3,14 @@ package ladder.domain;
 import ladder.util.RandomUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Ladder {
     private List<Line> lines;
     private List<Player> players;
     private List<Item> items;
+    private HashMap<String, String> results;
 
     private Ladder() {
     }
@@ -73,6 +75,15 @@ public class Ladder {
         for (Line line : lines) {
             runLine(line);
         }
+        setupResults();
+    }
+
+    private void setupResults() {
+        HashMap<String, String> result = new HashMap<>();
+        for (Player player : players) {
+            result.put(player.getName(), items.get(player.getPos()).getName());
+        }
+        this.results = result;
     }
 
     private void runLine(Line line) {
@@ -83,5 +94,9 @@ public class Ladder {
 
     public List<Item> getItems() {
         return items;
+    }
+
+    public HashMap<String, String> getResults() {
+        return results;
     }
 }

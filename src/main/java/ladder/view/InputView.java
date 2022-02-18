@@ -16,7 +16,7 @@ public class InputView {
 
     public static int getInputNumber(String message) {
         System.out.println(message);
-        int result = scanner.nextInt();
+        int result = Integer.parseInt(scanner.nextLine());
         System.out.println();
         return result;
     }
@@ -47,5 +47,12 @@ public class InputView {
             items.add(Item.of(name));
         }
         return items;
+    }
+
+    public static String getQuery() {
+        System.out.println("결과를 보고 싶은 사람은?");
+        String query = scanner.nextLine();
+        System.out.println();
+        return query;
     }
 }
