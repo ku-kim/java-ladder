@@ -69,4 +69,21 @@ public class Line {
     }
 
 
+    public void run(Player player) {
+        int playerPos = player.getPos();
+
+        if (playerPos == 0) {
+            if (isLadder(0))
+                player.setPos(1);
+        } else if (playerPos == maxLength - 1) {
+            if (isLadder(playerPos - 1))
+                player.setPos(playerPos - 1);
+        } else {
+            if (isLadder(playerPos))
+                player.setPos(playerPos + 1);
+            else if(isLadder(playerPos - 1))
+                player.setPos(playerPos - 1);
+
+        }
+    }
 }

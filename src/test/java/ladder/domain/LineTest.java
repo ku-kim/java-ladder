@@ -103,4 +103,226 @@ class LineTest {
             }
         }
     }
+
+    @Test
+    @DisplayName("사람 2명, 사다리 모양 | |")
+    void player2_connection_0() {
+        Line line = Line.createLineWithPlayerCount(2);
+        Player player1 = Player.valueOf("lucid", 0);
+        Player player2 = Player.valueOf("ader", 1);
+
+        line.run(player1);
+        line.run(player2);
+
+        assertThat(player1.getPos()).isEqualTo(0);
+        assertThat(player2.getPos()).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("사람 2명, 사다리 모양 |-|")
+    void player2_connection_1() {
+        Line line = Line.createLineWithPlayerCount(2);
+        line.drawLadder(0);
+        Player player1 = Player.valueOf("lucid", 0);
+        Player player2 = Player.valueOf("ader", 1);
+
+        line.run(player1);
+        line.run(player2);
+
+        assertThat(player1.getPos()).isEqualTo(1);
+        assertThat(player2.getPos()).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("사람 3명, 사다리 모양 | | |")
+    void player3_connection_0() {
+        Line line = Line.createLineWithPlayerCount(3);
+
+        Player player1 = Player.valueOf("lucid", 0);
+        Player player2 = Player.valueOf("ader", 1);
+        Player player3 = Player.valueOf("phill", 2);
+
+        line.run(player1);
+        line.run(player2);
+        line.run(player3);
+
+
+        assertThat(player1.getPos()).isEqualTo(0);
+        assertThat(player2.getPos()).isEqualTo(1);
+        assertThat(player3.getPos()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("사람 3명, 사다리 모양 |-| |")
+    void player3_left_connection_1() {
+        Line line = Line.createLineWithPlayerCount(3);
+        line.drawLadder(0);
+
+        Player player1 = Player.valueOf("lucid", 0);
+        Player player2 = Player.valueOf("ader", 1);
+        Player player3 = Player.valueOf("phill", 2);
+
+        line.run(player1);
+        line.run(player2);
+        line.run(player3);
+
+        assertThat(player1.getPos()).isEqualTo(1);
+        assertThat(player2.getPos()).isEqualTo(0);
+        assertThat(player3.getPos()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("사람 3명, 사다리 모양 | |-|")
+    void player3_right_connection_1() {
+        Line line = Line.createLineWithPlayerCount(3);
+        line.drawLadder(1);
+
+        Player player1 = Player.valueOf("lucid", 0);
+        Player player2 = Player.valueOf("ader", 1);
+        Player player3 = Player.valueOf("phill", 2);
+
+        line.run(player1);
+        line.run(player2);
+        line.run(player3);
+
+        assertThat(player1.getPos()).isEqualTo(0);
+        assertThat(player2.getPos()).isEqualTo(2);
+        assertThat(player3.getPos()).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("사람 4명, 사다리 모양 | | | |")
+    void player4_connection_0() {
+        Line line = Line.createLineWithPlayerCount(4);
+
+        Player player1 = Player.valueOf("lucid", 0);
+        Player player2 = Player.valueOf("ader", 1);
+        Player player3 = Player.valueOf("phill", 2);
+        Player player4 = Player.valueOf("miller", 3);
+
+        line.run(player1);
+        line.run(player2);
+        line.run(player3);
+        line.run(player4);
+
+        assertThat(player1.getPos()).isEqualTo(0);
+        assertThat(player2.getPos()).isEqualTo(1);
+        assertThat(player3.getPos()).isEqualTo(2);
+        assertThat(player4.getPos()).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("사람 4명, 사다리 모양 |-| | |")
+    void player4_left_connection_1() {
+        Line line = Line.createLineWithPlayerCount(4);
+        line.drawLadder(0);
+
+        Player player1 = Player.valueOf("lucid", 0);
+        Player player2 = Player.valueOf("ader", 1);
+        Player player3 = Player.valueOf("phill", 2);
+        Player player4 = Player.valueOf("miller", 3);
+
+        line.run(player1);
+        line.run(player2);
+        line.run(player3);
+        line.run(player4);
+
+        assertThat(player1.getPos()).isEqualTo(1);
+        assertThat(player2.getPos()).isEqualTo(0);
+        assertThat(player3.getPos()).isEqualTo(2);
+        assertThat(player4.getPos()).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("사람 4명, 사다리 모양 | |-| |")
+    void player4_center_connection_1() {
+        Line line = Line.createLineWithPlayerCount(4);
+        line.drawLadder(1);
+
+        Player player1 = Player.valueOf("lucid", 0);
+        Player player2 = Player.valueOf("ader", 1);
+        Player player3 = Player.valueOf("phill", 2);
+        Player player4 = Player.valueOf("miller", 3);
+
+        line.run(player1);
+        line.run(player2);
+        line.run(player3);
+        line.run(player4);
+
+        assertThat(player1.getPos()).isEqualTo(0);
+        assertThat(player2.getPos()).isEqualTo(2);
+        assertThat(player3.getPos()).isEqualTo(1);
+        assertThat(player4.getPos()).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("사람 4명, 사다리 모양 | | |-|")
+    void player4_right_connection_1() {
+        Line line = Line.createLineWithPlayerCount(4);
+        line.drawLadder(2);
+
+        Player player1 = Player.valueOf("lucid", 0);
+        Player player2 = Player.valueOf("ader", 1);
+        Player player3 = Player.valueOf("phill", 2);
+        Player player4 = Player.valueOf("miller", 3);
+
+        line.run(player1);
+        line.run(player2);
+        line.run(player3);
+        line.run(player4);
+
+        assertThat(player1.getPos()).isEqualTo(0);
+        assertThat(player2.getPos()).isEqualTo(1);
+        assertThat(player3.getPos()).isEqualTo(3);
+        assertThat(player4.getPos()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("사람 4명, 사다리 모양 |-| |-|")
+    void player4_all_connection() {
+        Line line = Line.createLineWithPlayerCount(4);
+        line.drawLadder(0);
+        line.drawLadder(2);
+
+        Player player1 = Player.valueOf("lucid", 0);
+        Player player2 = Player.valueOf("ader", 1);
+        Player player3 = Player.valueOf("phill", 2);
+        Player player4 = Player.valueOf("miller", 3);
+
+        line.run(player1);
+        line.run(player2);
+        line.run(player3);
+        line.run(player4);
+
+        assertThat(player1.getPos()).isEqualTo(1);
+        assertThat(player2.getPos()).isEqualTo(0);
+        assertThat(player3.getPos()).isEqualTo(3);
+        assertThat(player4.getPos()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("사람 5명, 라인 1줄, 사다리 |-| |-| |")
+    void Player4_Connection2() {
+        Line line = Line.createLineWithPlayerCount(5);
+        line.drawLadder(0);
+        line.drawLadder(2);
+
+        Player player1 = Player.valueOf("lucid", 0);
+        Player player2 = Player.valueOf("ader", 1);
+        Player player3 = Player.valueOf("phill", 2);
+        Player player4 = Player.valueOf("miller", 3);
+        Player player5 = Player.valueOf("kukim", 4);
+
+        line.run(player1);
+        line.run(player2);
+        line.run(player3);
+        line.run(player4);
+        line.run(player5);
+
+        assertThat(player1.getPos()).isEqualTo(1);
+        assertThat(player2.getPos()).isEqualTo(0);
+        assertThat(player3.getPos()).isEqualTo(3);
+        assertThat(player4.getPos()).isEqualTo(2);
+        assertThat(player5.getPos()).isEqualTo(4);
+    }
 }
