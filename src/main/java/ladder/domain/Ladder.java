@@ -8,6 +8,7 @@ import java.util.List;
 public class Ladder {
     private List<Line> lines;
     private List<Player> players;
+    private List<Item> items;
 
     private Ladder() {
     }
@@ -15,6 +16,14 @@ public class Ladder {
     public static Ladder create(List<Player> players, int ladderMaxHeight) {
         Ladder ladder = new Ladder();
         ladder.players = players;
+        ladder.lines = initLinesWithLadderMaxHeight(players.size(), ladderMaxHeight);
+        return ladder;
+    }
+
+    public static Ladder valueOf(List<Player> players, List<Item> items, int ladderMaxHeight) {
+        Ladder ladder = new Ladder();
+        ladder.players = players;
+        ladder.items = items;
         ladder.lines = initLinesWithLadderMaxHeight(players.size(), ladderMaxHeight);
         return ladder;
     }
@@ -70,5 +79,9 @@ public class Ladder {
         for (Player player : players) {
             line.run(player);
         }
+    }
+
+    public List<Item> getItems() {
+        return items;
     }
 }

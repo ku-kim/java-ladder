@@ -1,5 +1,6 @@
 package ladder.view;
 
+import ladder.domain.Item;
 import ladder.domain.Ladder;
 import ladder.domain.Line;
 import ladder.domain.Player;
@@ -15,10 +16,23 @@ public class OutputView {
     public static void print(Ladder ladder) {
         StringBuilder sb = new StringBuilder();
 
+        sb.append("사다리 결과 \n\n");
         appendPlayers(sb, ladder.getPlayers());
         appendLines(sb, ladder.getLines());
+        appendItems(sb, ladder.getItems());
 
         System.out.println(sb);
+    }
+
+    private static void appendItems(StringBuilder sb, List<Item> items) {
+        sb.append("   ");
+        for (Item item : items) {
+            String modItemName = StringUtils.center(item.getName(), 5, ' ');
+            modItemName = StringUtils.withLimitLength(modItemName, 5);
+
+            sb.append(String.format("%5s ", modItemName));
+        }
+        sb.append("\n");
     }
 
     private static void appendPlayers(StringBuilder sb, List<Player> players) {
@@ -54,4 +68,6 @@ public class OutputView {
         }
         sb.append("|     ");
     }
+
+
 }
