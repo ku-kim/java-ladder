@@ -1,4 +1,4 @@
-package ladder.domain;
+package ladder.dto;
 
 public class Item {
     private String name;

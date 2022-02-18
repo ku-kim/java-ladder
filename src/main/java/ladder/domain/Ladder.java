@@ -1,5 +1,7 @@
 package ladder.domain;
 
+import ladder.dto.Item;
+import ladder.dto.Player;
 import ladder.util.RandomUtils;
 
 import java.util.ArrayList;

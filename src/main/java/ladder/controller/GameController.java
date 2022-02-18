@@ -1,9 +1,9 @@
 package ladder.controller;
 
-import ladder.domain.Item;
+import ladder.dto.Item;
 import ladder.view.InputView;
 import ladder.domain.Ladder;
-import ladder.domain.Player;
+import ladder.dto.Player;
 import ladder.view.OutputView;
 
 import java.util.HashMap;

@@ -1,7 +1,7 @@
 package ladder.view;
 
-import ladder.domain.Item;
-import ladder.domain.Player;
+import ladder.dto.Item;
+import ladder.dto.Player;
 
 import java.util.ArrayList;
 import java.util.List;
