@@ -101,7 +101,11 @@ class LadderTest {
         players.add(Player.valueOf("kukim", 0));
         players.add(Player.valueOf("lucid", 1));
 
-        return Ladder.create(players, 2);
+        List<Item> items = new ArrayList<>();
+        items.add(Item.of("꽝"));
+        items.add(Item.of("300"));
+
+        return Ladder.valueOf(players, items, 2);
     }
 
     private Ladder init_player_4_line_3() {
@@ -111,6 +115,12 @@ class LadderTest {
         players.add(Player.valueOf("phill", 2));
         players.add(Player.valueOf("ader", 3));
 
-        return Ladder.create(players, 3);
+        List<Item> items = new ArrayList<>();
+        items.add(Item.of("꽝"));
+        items.add(Item.of("1000"));
+        items.add(Item.of("꽝"));
+        items.add(Item.of("3000"));
+
+        return Ladder.valueOf(players, items, 3);
     }
 }
