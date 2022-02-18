@@ -99,4 +99,8 @@ public class OutputView {
                 sb.append(String.format("%s : %s\n", playerName, itemName)));
         return sb.toString();
     }
+
+    public static void printExit() {
+        System.out.println("게임을 종료합니다.");
+    }
 }

@@ -20,6 +20,7 @@ public class GameController {
         ladder.run();
         processUserQuery(ladder.getResults());
 
+        OutputView.printExit();
         InputView.close();
     }
 
