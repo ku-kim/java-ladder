@@ -59,4 +59,16 @@ public class Ladder {
     public List<Player> getPlayers() {
         return players;
     }
+
+    public void run() {
+        for (Line line : lines) {
+            runLine(line);
+        }
+    }
+
+    private void runLine(Line line) {
+        for (Player player : players) {
+            line.run(player);
+        }
+    }
 }
