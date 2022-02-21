@@ -1,9 +1,12 @@
 package ladder.domain;
 
+import ladder.dto.Player;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Line {
+    private static final int FIRST_POS = 0;
     private List<Boolean> points;
     private int maxLength;
 
@@ -21,11 +24,13 @@ public class Line {
         return line;
     }
 
-    private void checkCount(int count) {
-        if (count < 0) {
-            throw new IllegalArgumentException("count가 정상 범위를 넘었습니다.");
+    public void drawLadder(int ladderPos) {
+        checkPos(ladderPos);
+        if (isDrawLadder(ladderPos)) {
+            points.set(ladderPos, true);
         }
     }
+
 
     public boolean isLadder(int ladderPos) {
         checkPos(ladderPos);
@@ -36,37 +41,64 @@ public class Line {
         return maxLength;
     }
 
-    public void drawLadder(int ladderPos) {
-        checkPos(ladderPos);
-        if (isDrawLadder(ladderPos)) {
-            points.set(ladderPos, true);
+    public void run(Player player) {
+        int playerPos = player.getPos();
+
+        if (isFirstPos(playerPos)) {
+            moveRight(player, playerPos);
+            return;
+        }
+        if (isLastPos(playerPos)) {
+            moveLeft(player, playerPos);
+            return;
+        }
+        moveRight(player, playerPos);
+        moveLeft(player, playerPos);
+    }
+
+    private void checkCount(int count) {
+        if (count < FIRST_POS) {
+            throw new IllegalArgumentException("count가 정상 범위를 넘었습니다.");
         }
     }
 
     private boolean isDrawLadder(int ladderPos) {
-        if (ladderPos == 0) {
-            return checkCur(ladderPos) && checkRight(ladderPos);
+        if (isFirstPos(ladderPos)) {
+            return !isLadder(ladderPos) && !isRightLadder(ladderPos);
         }
-        return checkLeft(ladderPos) && checkCur(ladderPos) && checkRight(ladderPos);
+        return !isLeftLadder(ladderPos) && !isLadder(ladderPos) && !isRightLadder(ladderPos);
     }
 
     private void checkPos(int point) {
-        if (point < 0 || point >= maxLength - 1) {
+        int lastPos = maxLength;
+        if (point < FIRST_POS || point >= lastPos) {
             throw new IllegalArgumentException("pos가 정상 범위를 넘었습니다.");
         }
     }
 
-    private boolean checkLeft(int ladderPos) {
-        return !points.get(ladderPos - 1);
+    private boolean isLeftLadder(int ladderPos) {
+        return points.get(ladderPos - 1);
     }
 
-    private boolean checkRight(int ladderPos) {
-        return !points.get(ladderPos + 1);
+    private boolean isRightLadder(int ladderPos) {
+        return points.get(ladderPos + 1);
     }
 
-    private boolean checkCur(int ladderPos) {
-        return !points.get(ladderPos);
+    private boolean isLastPos(int playerPos) {
+        return playerPos == maxLength - 1;
     }
 
+    private void moveLeft(Player player, int playerPos) {
+        if (isLeftLadder(playerPos))
+            player.moveLeft();
+    }
 
+    private void moveRight(Player player, int playerPos) {
+        if (isLadder(playerPos))
+            player.moveRight();
+    }
+
+    private boolean isFirstPos(int pos) {
+        return pos == FIRST_POS;
+    }
 }

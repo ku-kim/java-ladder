@@ -329,6 +329,67 @@ class LineTest {
 </details>
 
 
+# step5 : 완성
+
+<details>
+<summary> 🖼 Step 5 결과 </summary>
+<div markdown="1">
+
+#### 결과
+
+```text
+참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)
+ader,lucid,phill,kukim,milllller
+
+실행 결과를 입력하세요. (결과는 쉼표(,)로 구분하세요)
+10,20,-1000,50,500
+
+최대 사다리 높이는 몇 개인가요?
+7
+
+사다리 결과 
+
+   ader  lucid phill kukim mil.. 
+     |-----|     |-----|     |
+     |-----|     |-----|     |
+     |     |     |-----|     |
+     |-----|     |-----|     |
+     |     |     |-----|     |
+     |-----|     |     |-----|
+     |-----|     |-----|     |
+    10    20   -1000  50    500  
+
+결과를 보고 싶은 사람은?
+ader
+
+실행 결과
+20
+
+결과를 보고 싶은 사람은?
+kuuuukim
+
+실행 결과
+kuuuukim 사람이 없습니다.
+
+결과를 보고 싶은 사람은?
+all
+
+실행 결과
+milllller : -1000
+phill : 500
+ader : 20
+lucid : 10
+kukim : 50
+
+결과를 보고 싶은 사람은?
+춘식이
+
+게임을 종료합니다.
+```
+
+</div>
+</details>
+
 ---
 
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fku-kim%2Fjava-ladder&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
